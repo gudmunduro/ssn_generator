@@ -26,7 +26,7 @@ let calculate_check_digit from =
   | 1 -> InvalidRemainder
   | _ -> Ok(11 - remainder)
 
-let rec to_two_digit_string value =
+let to_two_digit_string value =
   let str_val = Int.to_string value in
 
   match String.length str_val with 
@@ -43,19 +43,19 @@ let rec get_two_random_and_check_digit date_part two_random =
   | InvalidRemainder -> get_two_random_and_check_digit date_part (two_random + 1) ;;
 
 let generate_ssn from_year to_year = 
-  (** Date part *)
+  (* Date part *)
   let day = Random.int_incl 1 28 |> to_two_digit_string in
   let month = Random.int_incl 1 12 |> to_two_digit_string in
   let full_year = Random.int_incl from_year to_year |> Int.to_string in
   let year_last_two = String.sub full_year ~pos: 2 ~len: 2 in
 
-  (** Random and check_digit *)
+  (* Random and check_digit *)
   let (two_random, check_digit) = 
     get_two_random_and_check_digit 
       (day ^ month ^ year_last_two)
       (Random.int_incl 20 99) in
 
-  (** Last digit(century) *)
+  (* Last digit(century) *)
   let century = String.sub full_year ~pos: 1 ~len: 1 in
 
   day ^
@@ -90,4 +90,4 @@ let () =
   else 
     1 in
   let ssn_list = generate_multiple count 2012 2020 in
-  List.iter ssn_list (fun ssn -> print_endline ssn)
+  List.iter ssn_list ~f: (fun ssn -> print_endline ssn)
