@@ -89,5 +89,5 @@ let () =
     Int.of_string args.(1)
   else 
     1 in
-  let ssn_list = generate_multiple count 2012 2020 in
+  let ssn_list = generate_multiple count 1990 2020 in
   List.iter ssn_list ~f: (fun ssn -> print_endline ssn)
