@@ -1,0 +1,3 @@
+(executable
+ (name ssn_generator)
+ (libraries core str))
